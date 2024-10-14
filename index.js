@@ -1,0 +1,63 @@
+import express from "express"
+import bodyParser from "body-parser"
+import axios from "axios"
+
+const app = express();
+const port = 3000;
+const APIurl = "http://localhost:4000";
+
+app.use(express.static("public"));
+
+// Middleware
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
+//******************* Inputs views routes ****************************
+// New Post route
+app.get("/newPost", (req, res) => {
+    res.render("inputs.ejs")
+})
+
+//******************* API Routes ****************************
+// Home Page
+app.get("/", async (req, res) => {
+    try {
+        const response = await axios.get(APIurl + "/")
+        // console.log(response)
+        res.render("index.ejs", {posts: response.data})
+
+    } catch (error) {
+        res.status(500).json({message: "Error getting the content."})
+    }
+})
+// New post api route
+app.post("/new", async (req, res) => {
+    try {
+        const response = await axios.post(APIurl + "/publish", req.body)
+        //console.log(req.body);        
+        res.redirect("/")        
+    } catch (error) {
+        res.status(500).json({message: "Error publishing the post."})
+        console.log(error.message)
+    }
+})
+// Get the Post from id and render inputs.ejs
+app.get("/edit/:id", async (req, res) => {
+    try {
+        const response = await axios.get(APIurl + "/edit/" + req.params.id)        
+        res.render("inputs.ejs", { post: response.data}
+        )
+    } catch (error) {
+        res.status(500).json({message: "Error opening the post."})
+        console.log(error.message)
+    }
+})
+
+
+
+
+//Port
+app.listen(port, () =>{
+    console.log("Server running at http://localhost:" + port);
+})

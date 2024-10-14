@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new post</title>
+
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+
+<body>
+
+    <% if (!locals.post) { %>
+        <div class="header">
+            <h1>Create New Post</h1>
+        </div>
+
+        <div class="post-container input-form">
+            <form id="form-input" action="/new" method="POST">
+                <input type="text" name="title" placeholder="Title" required>
+                <textarea name="content" id="post-text" placeholder="Write your post here (max 400 characters)" rows="6"
+                    maxlength="400" required></textarea>
+                <input type="text" name="author" placeholder="Author" required>
+                <input type="text" name="country" placeholder="Your country" required>
+
+                <div class="post-buttons">
+                    <button class="btn post" type="submit">Publish</button>
+                    <a href="/" class="btn cancel">Cancel & Return</a>
+                </div>
+            </form>
+        </div>
+
+        <% } else { %>
+
+            <div class="header">
+                <h1>Edit your post</h1>
+            </div>
+
+            <div class="post-container input-form">
+                <form id="form-edit" action="/new" method="POST">
+                    <input type="text" name="title" placeholder="Title" value="<%= post.title %>">
+                    <textarea name="content" id="post-text" placeholder="Write your post here (max 400 characters)"
+                        rows="6" maxlength="400" required><%= post.content %></textarea>
+                    <input type="text" name="author" placeholder="Author" value="<%= post.author %>">
+                    <input type="text" name="country" placeholder="Your country" value="<%= post.country %>">
+
+                    <div class="post-buttons">
+                        <button class="btn post" type="submit">Finish</button>
+                        <a href="/" class="btn cancel">Cancel & Return</a>
+                    </div>
+                </form>
+            </div>
+            <% } %>
+</body>
+
+</html>
