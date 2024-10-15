@@ -13,18 +13,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-//******************* Inputs views routes ****************************
-// New Post route
+
+// New Post page route
 app.get("/newPost", (req, res) => {
     res.render("inputs.ejs")
 })
 
-//******************* API Routes ****************************
 // Home Page
 app.get("/", async (req, res) => {
     try {
         const response = await axios.get(APIurl + "/")
-        // console.log(response)
         res.render("index.ejs", {posts: response.data})
 
     } catch (error) {
@@ -42,7 +40,7 @@ app.post("/new", async (req, res) => {
         console.log(error.message)
     }
 })
-// Get the Post from id and render inputs.ejs to show it
+// Get the Post from id and render inputs.ejs to edit
 app.get("/edit/:id", async (req, res) => {
     try {
         const response = await axios.get(APIurl + "/edit/" + req.params.id)        
@@ -68,11 +66,32 @@ app.get("/delete/:id", async (req, res) => {
     try {
         const response = await axios.delete(APIurl + "/delete/" + req.params.id)        
         res.redirect("/")
-        
+
     } catch (error) {
         res.status(500).json({message: "Error deleting the post."})
         console.log(error.message)
     }    
+})
+// Get post Id to comment
+app.get("/comment/:id", async (req, res) => {
+    const response = await axios.get(APIurl + "/comment/" + req.params.id)
+    const postToComment = response.data
+
+    res.render("comment.ejs", { post: postToComment })
+})
+//Post new comment
+app.post("/comment/new/:id", async (req, res) => {
+    const response = await axios.post(APIurl + "/comment/new/" + req.params.id + "/submit", req.body)
+    res.redirect("/")
+})
+//View all comments
+app.get("/view/:id/comments", async (req, res) => {
+    try {
+        const response = await axios.get(APIurl + "/view/" + req.params.id)
+        res.render("read_comments.ejs", { post: response.data })
+    } catch (error) {
+        res.status(500).json({message: "Error getting the comments."})
+    }
 })
 
 

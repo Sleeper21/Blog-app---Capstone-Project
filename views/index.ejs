@@ -11,18 +11,13 @@
 
     <div class="header">
         <h1>Blog Web App</h1>
-
         <a href="/newPost" class="btn new-post">New Post</a>
     </div>
-
-    <!-- <div class="wrapper"> -->
-        <% if (posts.length > 0) { %>
-         
-            <% posts.forEach(post => { %>
-         
+   
+        <% if (posts.length > 0) { %>         
+            <% posts.forEach(post => { %>   
                 
-                <div class="post-container">
-        
+                <div class="post-container">        
                     <h2>
                         <%= post.title %>
                     </h2>
@@ -38,27 +33,29 @@
                     
                     <div class="post-buttons-container">
                         <div class="comment-count-container">
-                            <a href="#" class="comment-count"> Number of comments here</a>
+
+                            <% if (post.comments.length > 0) { %>
+                                <a href="/view/<%= post.id %>/comments" class="comment-count">
+                                See all Comments (<%= post.comments.length %>)
+                                </a>
+                            <% } else { %>
+                                <p> <em>No comments yet</em> </p>
+                            <% } %>
+                            
                         </div>
                         <div class="post-buttons">
-                            <a href="#" class="btn comment">Comment</a>
+                            <a href="/comment/<%= post.id %>" class="btn comment">Write a comment</a>
                             <a href="/edit/<%= post.id %>" class="btn edit">Edit</a>
                             <a href="/delete/<%= post.id %>" onclick="confirmDelete()" class="btn delete">Delete</a>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </div>
-
             <% }) %>
 
         <% } else { %>
-
             <h2>No posts yet to display</h2>
+            <% } %> 
 
-            <% } %>     
-        
-    <!-- </div> -->
- 
 <script>
     function confirmDelete () {
         const confirmed = confirm("Wait! This action will delete the post completely!")

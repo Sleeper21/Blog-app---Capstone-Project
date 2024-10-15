@@ -9,7 +9,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //All Posts
-let lastIdPosted = 5;
 let posts = [
     {
         id: 1,
@@ -18,11 +17,15 @@ let posts = [
         author: "Julia Mendes",
         country: "Brazil",
         date: "August 22, 2024",
-        comments: 
+        comments: [
             {
                 id: 1,
-                comment: "I Agree"
-            }
+                comment: "I Agree!",
+                author: "Pedro Cruz",
+                country: "Portugal",
+                date: "October 02, 2024",
+            },
+        ]
     },
     {
         id: 2,
@@ -31,6 +34,7 @@ let posts = [
         author: "Sofia Martins",
         country: "Portugal",
         date: "September 15, 2024",
+        comments: [],
     },
     {
         id: 3,
@@ -39,6 +43,15 @@ let posts = [
         author: "Thomas Müller",
         country: "Germany",
         date: "September 30, 2024",
+        comments: [
+            {
+                id: 1,
+                comment: "I Agree!",
+                author: "Pedro Cruz",
+                country: "Portugal",
+                date: "October 02, 2024",
+            },
+        ]
     },
     {
         id: 4,
@@ -47,6 +60,15 @@ let posts = [
         author: "Carlos Herrera",
         country: "Mexico",
         date: "October 3, 2024",
+        comments: [
+            {
+                id: 1,
+                comment: "I Agree!",
+                author: "Pedro Cruz",
+                country: "Portugal",
+                date: "October 02, 2024",
+            },
+        ]
     },
     {
         id: 5,
@@ -55,9 +77,20 @@ let posts = [
         author: "Mei Lin",
         country: "China",
         date: "October 7, 2024",
+        comments: [
+            {
+                id: 1,
+                comment: "I Agree!",
+                author: "Pedro Cruz",
+                country: "Portugal",
+                date: "October 02, 2024",
+            },
+        ]
     },
 ];
 
+let lastIdPosted = 5;
+let commentsCount = 5;
 
 // Get all posts
 app.get("/", (req, res) => {
@@ -90,6 +123,7 @@ app.post("/publish", (req, res) => {
         author: req.body.author,
         country: req.body.country,
         date: formattedDate,
+        comments:[],
     }
     posts.push(newPost)
     lastIdPosted ++
@@ -118,6 +152,7 @@ app.patch("/edit/:id/publish", (req, res) => {
         author: req.body.author || postToEdit.author,
         country: req.body.country || postToEdit.country,
         date: "Edited on: " + formattedDate,
+        comments: postToEdit.comments,
     }
     res.json(posts)    
 })
@@ -129,7 +164,52 @@ app.delete("/delete/:id", (req, res) => {
     posts.splice(indexToDelete, 1)
     res.status(200).json({message: "Post deleted."})
 })
+//Get post id to comment
+app.get("/comment/:id", (req, res) => {
+    const idSelected = parseInt(req.params.id); 
+    const postToComment = posts.find((post) => post.id === idSelected);
+    //console.log(postToEdit);
+    
+    if (!postToComment) return res.status(404).json({message: "Post content not found"})
+    res.json(postToComment)
+})
+//Post new comment
+app.post("/comment/new/:id/submit", (req, res) => {
+    const postId = parseInt(req.params.id)
 
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit", 
+    })
+
+    const newComment = {
+        id: commentsCount + 1,
+        comment: req.body.comment,
+        author: req.body.author,
+        country: req.body.country,
+        date: formattedDate,
+    }
+    //console.log(newComment);
+    const index = posts.findIndex((post) => postId === post.id)
+    const allPostComments = posts[index].comments
+    //console.log(allPostComments);
+
+    allPostComments.push(newComment)
+    commentsCount++
+
+    res.status(200).json({message: "Comment published."})
+    console.log(allPostComments);    
+})
+
+//Get all comments from a post
+app.get("/view/:id", (req, res) => {
+    const selectedPost = posts.find((post) => post.id === parseInt(req.params.id))
+    if (!selectedPost) return res.status(404).json({message: "Post comments not found."})
+    
+    res.json(selectedPost)
+})
 
 app.listen(port, () => {
     console.log("API is running at http://localhost:"+ port);

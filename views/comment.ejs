@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a comment</title>
+
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>Comment this post</h1>
+    </div>
+
+    <div class="post-container">
+        
+        <h2>
+        <%= post.title %>
+        </h2>
+        <p>
+        <%= post.content %>
+        </p>
+        <small>
+        By: <b><%= post.author %></b> -- from -- <b><%= post.country %></b>
+        </small>
+        <small>
+        <%= post.date %>
+        </small>
+        
+        <div class="post-buttons-container">
+            <div class="comment-count-container">
+
+                <% if (post.comments.length > 0) { %>
+                    <a href="#" class="comment-count">
+                    See all Comments (<%= post.comments.length %>)
+                    </a>
+                <% } else { %>
+                    <p> <em>No comments yet</em> </p>
+                <% } %>
+                
+            </div>
+        </div>        
+    </div>
+
+    <div class="post-container input-form">
+        <form id="form-input" action="/comment/new/<%= post.id %>" method="post">
+            <textarea name="comment" id="post-text" placeholder="Write your comment here (max 250 characters)" rows="6"
+                maxlength="250" required></textarea>
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="text" name="country" placeholder="Your country" required>
+
+            <div class="post-buttons">
+                <button class="btn post" type="submit">Publish Your Comment</button>
+                <a href="/" class="btn cancel">Cancel & Return</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

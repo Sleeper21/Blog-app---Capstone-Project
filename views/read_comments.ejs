@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All comments</title>
+
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+
+<div class="post-container">    
+    <h2> <%= post.title %> </h2>
+    <p><%= post.content %></p>
+    <small>By: <b><%= post.author %></b> -- from -- <b><%= post.country %></b></small>
+    <small> <%= post.date %> </small>
+    <div class="comment-count-container">
+        <% if (post.comments.length > 1) { %>
+         <p><%= post.comments.length %> Comments ⬇ </p>
+        <% } else { %>
+         <p><%= post.comments.length %> Comment ⬇</p> 
+        <% } %> 
+    </div>
+
+    <div class="all-comments-container">
+        <% post.comments.forEach(comment => { %>
+
+        <div class="comment-card">
+          <small>On <%= comment.date %> -from- <%= comment.country %></small>
+          <h3> <%= comment.author %> <span style="font-size: smaller; font-weight: 200;">commented:</span> </h3>
+          <p> <%= comment.comment %></p>
+        </div>
+
+        <% }) %>
+        
+    </div>
+    
+    <div class="post-buttons-container">
+        <div class="post-buttons">
+            <a href="/comment/<%= post.id %>" class="btn comment">Add comment</a>
+            <a href="/" onclick="confirmDelete()" class="btn delete">Back</a>
+        </div>
+    </div>
+    
+</div>
+    
+</body>
+</html>
