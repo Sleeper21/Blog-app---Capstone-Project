@@ -42,7 +42,7 @@ app.post("/new", async (req, res) => {
         console.log(error.message)
     }
 })
-// Get the Post from id and render inputs.ejs
+// Get the Post from id and render inputs.ejs to show it
 app.get("/edit/:id", async (req, res) => {
     try {
         const response = await axios.get(APIurl + "/edit/" + req.params.id)        
@@ -53,7 +53,27 @@ app.get("/edit/:id", async (req, res) => {
         console.log(error.message)
     }
 })
-
+// Patch one parameter of a post and publish the edited post
+app.post("/edit/:id/submit", async (req, res) => {
+    try {
+        const response = await axios.patch(APIurl + "/edit/" + req.params.id + "/publish", req.body)
+        res.redirect("/")
+    } catch (error) {
+        res.status(500).json({message: "Error updating the post."})
+        console.log(error.message)
+    }
+})
+//Delete a post
+app.get("/delete/:id", async (req, res) => {
+    try {
+        const response = await axios.delete(APIurl + "/delete/" + req.params.id)        
+        res.redirect("/")
+        
+    } catch (error) {
+        res.status(500).json({message: "Error deleting the post."})
+        console.log(error.message)
+    }    
+})
 
 
 

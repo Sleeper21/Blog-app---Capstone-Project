@@ -12,6 +12,7 @@
 <body>
 
     <% if (!locals.post) { %>
+
         <div class="header">
             <h1>Create New Post</h1>
         </div>
@@ -38,7 +39,7 @@
             </div>
 
             <div class="post-container input-form">
-                <form id="form-edit" action="/new" method="POST">
+                <form id="form-edit" action="/edit/<%= post.id %>/submit" method="post">
                     <input type="text" name="title" placeholder="Title" value="<%= post.title %>">
                     <textarea name="content" id="post-text" placeholder="Write your post here (max 400 characters)"
                         rows="6" maxlength="400" required><%= post.content %></textarea>

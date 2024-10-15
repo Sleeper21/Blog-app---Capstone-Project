@@ -35,13 +35,18 @@
                     <small>
                         <%= post.date %>
                     </small>
-        
-                    <div class="post-buttons">
-                        <a href="#" class="btn comment">Comment</a>
-                        <a href="/edit/<%= post.id %>" class="btn edit">Edit</a>
-                        <a href="#" class="btn delete">Delete</a>
-        
+                    
+                    <div class="post-buttons-container">
+                        <div class="comment-count-container">
+                            <a href="#" class="comment-count"> Number of comments here</a>
+                        </div>
+                        <div class="post-buttons">
+                            <a href="#" class="btn comment">Comment</a>
+                            <a href="/edit/<%= post.id %>" class="btn edit">Edit</a>
+                            <a href="/delete/<%= post.id %>" onclick="confirmDelete()" class="btn delete">Delete</a>
+                        </div>
                     </div>
+                    
                 </div>
 
             <% }) %>
@@ -54,6 +59,15 @@
         
     <!-- </div> -->
  
+<script>
+    function confirmDelete () {
+        const confirmed = confirm("Wait! This action will delete the post completely!")
+        // if (confirmed) {
+        //     return true;
+        // }
+        // return false;
+    }
+</script>
 
 </body>
 </html>

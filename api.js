@@ -18,6 +18,11 @@ let posts = [
         author: "Julia Mendes",
         country: "Brazil",
         date: "August 22, 2024",
+        comments: 
+            {
+                id: 1,
+                comment: "I Agree"
+            }
     },
     {
         id: 2,
@@ -63,7 +68,7 @@ app.get("/", (req, res) => {
 app.get("/edit/:id", (req, res) => {
     const idSelected = parseInt(req.params.id); 
     const postToEdit = posts.find((post) => post.id === idSelected);
-    console.log(postToEdit);
+    //console.log(postToEdit);
     
     if (!postToEdit) return res.status(404).json({message: "Post content not found"})
     res.json(postToEdit)
@@ -71,7 +76,6 @@ app.get("/edit/:id", (req, res) => {
 
 // Add new Post
 app.post("/publish", (req, res) => {
-
     const date = new Date();
     const formattedDate = date.toLocaleDateString("en-US", {  //Just to format the date
         year: "numeric",
@@ -90,9 +94,40 @@ app.post("/publish", (req, res) => {
     posts.push(newPost)
     lastIdPosted ++
 
-    res.json(posts)
-    
-    
+    res.json(posts)    
+})
+
+// Patch a post
+app.patch("/edit/:id/publish", (req, res) => {
+    const postId = parseInt(req.params.id)
+    const postToEdit = posts.find((post) => post.id === postId)
+    if (!postToEdit) return res.statur(404).json({ message: "Original post not found. Try again on a published post."})
+
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long", 
+        day: "2-digit", 
+    })
+
+    const locationIndex = posts.findIndex((post) => post.id === postId)
+    posts[locationIndex] = {
+        id: postId,
+        title: req.body.title || postToEdit.title,
+        content: req.body.content || postToEdit.content,
+        author: req.body.author || postToEdit.author,
+        country: req.body.country || postToEdit.country,
+        date: "Edited on: " + formattedDate,
+    }
+    res.json(posts)    
+})
+// Delete a post
+app.delete("/delete/:id", (req, res) => {
+    const postId = parseInt(req.params.id)
+    const indexToDelete = posts.findIndex((post) => post.id === postId)
+
+    posts.splice(indexToDelete, 1)
+    res.status(200).json({message: "Post deleted."})
 })
 
 

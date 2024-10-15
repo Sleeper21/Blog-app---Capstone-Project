@@ -32,7 +32,7 @@ body{
 }
 
 .post-container{
-    background-color: rgb(169, 165, 172);
+    background-color: rgb(226, 226, 226);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -45,11 +45,15 @@ body{
 
 /* Buttons */
 
+.post-buttons-container{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+}
+
 .post-buttons{
     display: flex;
-    justify-content: end;
     gap: 1.5rem;
-    padding-top: 1.5rem;
 }
 
 .btn{
@@ -81,8 +85,17 @@ body{
     transition: 20ms ease-in;
 }
 
-/******************** inputs view *************************/
+@media (max-width: 650px) {
+    .post-buttons-container{
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
 
+/******************** inputs view *************************/
+.input-form{
+    width: 80%;
+}
 #form-input{
     display: flex;
     flex-direction: column;
@@ -92,9 +105,10 @@ body{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    max-width: 90%;
 }
-.input-form{
-    width: 500px;
+#form-input > input , textarea{
+    font-size: 1.3rem;
 }
 .post{
     border: none;
