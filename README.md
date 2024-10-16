@@ -36,14 +36,14 @@ Now much more easily i could have implemented the "edit" and "delete" features o
 Also i know this would be usable only with authentication , so only the author could edit or delete the posts or the comments, but it is not a subject that i have yet dived in, so, probably later i can implement it.
 
 Homepage screenshot:
-![Homepage screenshot](public/images/image.png)
+![Homepage screenshot](frontend/public/images/image.png)
 
 New blog post screenshot:
-![New blog post screenshot](public/images/image-1.png)
+![New blog post screenshot](frontend/public/images/image-1.png)
 
 Write comment screenshot:
-![Write comment screenshot](public/images/image-2.png)
+![Write comment screenshot](frontend/public/images/image-2.png)
 
 Read comments page screenshot:
-![Read comments page screenshot](public/images/image-3.png)
+![Read comments page screenshot](frontend/public/images/image-3.png)
 
