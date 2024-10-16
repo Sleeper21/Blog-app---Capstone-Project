@@ -1,5 +1,6 @@
 import express from "express"
 import bodyParser from "body-parser"
+import cors from "cors"
 
 const app = express();
 const port = 4000;
@@ -7,6 +8,12 @@ const port = 4000;
 // Middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// CORS config -- only to allow Cross-Origin Resource Sharing to deploy on onrender
+app.use(cors({
+    origin: "https://blog-app-capstone-project-zzp5.onrender.com",
+    credentials: true
+}))
 
 //All Posts
 let posts = [

@@ -4,14 +4,15 @@ import axios from "axios"
 
 const app = express();
 const port = 3000;
-const APIurl = "http://localhost:4000";
+const APIurl = process.env.NODE_ENV === 'production'
+? "https://blog-app-capstone-project.onrender.com"  // if used locally, it will be the localhost 4000
+: "http://localhost:4000";
 
 app.use(express.static("public"));
 
 // Middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
 
 
 // New Post page route
