@@ -3,8 +3,11 @@ import bodyParser from "body-parser"
 import axios from "axios"
 
 const app = express();
-const port = 3000;
-const APIurl = "http://localhost:4000";
+//Adding environment variables for developping (local) and for deploying (render)
+const port = process.envPORT || 3000;
+const APIurl = process.env.NODE_ENV === 'production' 
+  ? process.env.RENDER_EXTERNAL_URL // URL em produção (Render)
+  : "http://localhost:4000";        // URL em desenvolvimento (local)
 
 app.use(express.static("public"));
 
