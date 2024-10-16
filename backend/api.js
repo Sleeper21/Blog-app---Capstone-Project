@@ -27,9 +27,9 @@ let posts = [
         comments: [
             {
                 id: 1,
-                comment: "I Agree!",
-                author: "Pedro Cruz",
-                country: "Portugal",
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                author: "Dr. Smith",
+                country: "USA",
                 date: "October 02, 2024",
             },
         ]
@@ -53,9 +53,9 @@ let posts = [
         comments: [
             {
                 id: 1,
-                comment: "I Agree!",
-                author: "Pedro Cruz",
-                country: "Portugal",
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                author: "Bruno Lopes",
+                country: "Brasil",
                 date: "October 02, 2024",
             },
         ]
@@ -70,9 +70,9 @@ let posts = [
         comments: [
             {
                 id: 1,
-                comment: "I Agree!",
-                author: "Pedro Cruz",
-                country: "Portugal",
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                author: "Hai",
+                country: "Japan",
                 date: "October 02, 2024",
             },
         ]
@@ -87,9 +87,9 @@ let posts = [
         comments: [
             {
                 id: 1,
-                comment: "I Agree!",
-                author: "Pedro Cruz",
-                country: "Portugal",
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                author: "Harry K.",
+                country: "France",
                 date: "October 02, 2024",
             },
         ]
