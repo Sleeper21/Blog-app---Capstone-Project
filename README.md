@@ -1,15 +1,26 @@
+If you are using it online (via onrender in this case):
+- because the backend is running the changes you make may take some time to reset,
+so if you want to reset any change you have made, please use the reset button on the homepage.
+
+If using it locally, just refresh the api.js via terminal
+
+Info local usage:
+
 API (api.js) will run on localhost port 4000
 the app (index.js) will run on localhost port 3000
 
-So the API url will be: http://localhost:4000
+So the API url is: http://localhost:4000
 
 How to run the app:
+
     On the terminal:
-        1. npm i
-        2. nodemon index.js
+        1. cd to the frontend folder
+        2. npm i
+        3. nodemon index.js
 
     Open another terminal (for the API):
-        1. nodemon app.js
+        1. cd to the backend folder
+        2. nodemon api.js
 
 Done.
 

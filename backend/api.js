@@ -218,6 +218,94 @@ app.get("/view/:id", (req, res) => {
     res.json(selectedPost)
 })
 
+//Reset all changes  **********************************************
+app.post("/api/reset", (req, res) => {
+    posts = [
+        {
+            id: 1,
+            title: "The Impact of Artificial Intelligence on the Job Market",
+            content: "Artificial intelligence (AI) is revolutionizing the job market across various industries. While some jobs are being automated, new opportunities are also emerging. The key to navigating this new landscape is adapting and learning new skills. In this post, we explore which sectors are being most affected and what to expect for the future.",
+            author: "Julia Mendes",
+            country: "Brazil",
+            date: "August 22, 2024",
+            comments: [
+                {
+                    id: 1,
+                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                    author: "Dr. Smith",
+                    country: "USA",
+                    date: "October 02, 2024",
+                },
+            ]
+        },
+        {
+            id: 2,
+            title: "The Importance of Sleep for Mental Health",
+            content: "Sleep plays a crucial role in our mental health. Studies show that sleep deprivation can lead to issues like anxiety, depression, and cognitive difficulties. Maintaining a good sleep routine is essential for overall well-being, improving mood, memory, and learning capabilities. In this article, we discuss tips for better sleep quality and the positive impact it can have on your life.",
+            author: "Sofia Martins",
+            country: "Portugal",
+            date: "September 15, 2024",
+            comments: [],
+        },
+        {
+            id: 3,
+            title: "Sustainable Travel: How to Reduce Your Ecological Footprint",
+            content: "Traveling is one of the greatest sources of joy and learning, but it can have a significant environmental impact. This post discusses ways to travel more sustainably, such as choosing public transportation, staying in eco-friendly accommodations, and reducing plastic consumption while on the road. Small changes can make a big difference.",
+            author: "Thomas Müller",
+            country: "Germany",
+            date: "September 30, 2024",
+            comments: [
+                {
+                    id: 1,
+                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                    author: "Bruno Lopes",
+                    country: "Brasil",
+                    date: "October 02, 2024",
+                },
+            ]
+        },
+        {
+            id: 4,
+            title: "How to Organize Personal Finances with Ease",
+            content: "Organizing your personal finances doesn’t have to be complicated. With a few simple practices, like creating a budget, tracking expenses, and setting financial goals, you can gain control over your money. This post offers a basic introduction on how to start, along with useful tools to make the process more efficient.",
+            author: "Carlos Herrera",
+            country: "Mexico",
+            date: "October 3, 2024",
+            comments: [
+                {
+                    id: 1,
+                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                    author: "Hai",
+                    country: "Japan",
+                    date: "October 02, 2024",
+                },
+            ]
+        },
+        {
+            id: 5,
+            title: "The Future of Gaming: Virtual Reality and Total Immersion",
+            content: "With virtual reality (VR) becoming more advanced, the future of gaming promises increasingly immersive experiences. Companies are investing heavily in technologies that provide greater interactivity and physical sensations in games. This article explores the potential of VR in the gaming industry and how it could transform the way we play.",
+            author: "Mei Lin",
+            country: "China",
+            date: "October 7, 2024",
+            comments: [
+                {
+                    id: 1,
+                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sodales tortor. Phasellus convallis consequat efficitur. Nullam id quam nunc. Fusce sit amet turpis ante. Mauris in laoreet tortor. ",
+                    author: "Harry K.",
+                    country: "France",
+                    date: "October 02, 2024",
+                },
+            ]
+        },
+    ];
+    
+    lastIdPosted = 5;  // reset countings
+    commentsCount = 5;
+
+    res.json(posts)
+})
+
 app.listen(port, () => {
     console.log("API is running at http://localhost:"+ port);
 });
