@@ -93,6 +93,16 @@ app.get("/view/:id/comments", async (req, res) => {
     }
 })
 
+//Reset all changes .. Utility for deploy and share project only
+app.get("/reset", async (req, res) => {
+    try {
+        const response = await axios.post(APIurl + "/api/reset")
+        res.render("index.ejs", {posts: response.data})
+        
+    } catch (error) {
+        res.status(500).json({message: "Error resetting changes."})
+            }
+})
 
 
 //Port

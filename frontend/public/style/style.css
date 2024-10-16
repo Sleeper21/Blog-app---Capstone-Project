@@ -61,6 +61,9 @@ body{
     cursor: pointer;
 }
 
+.reset{
+    background-color: brown;
+}
 .comment{
     background-color: rgb(51, 50, 50);
 }
